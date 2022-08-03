@@ -14,6 +14,7 @@ import com.example.socialnetworkapp.R;
 public class SocialNetworkAdapter extends RecyclerView.Adapter<SocialNetworkAdapter.ViewHolder> {
 
     private String[] dataSource;
+    private OnItemMyClickListener onItemMyClickListener; // слушатель будет устанавливаться извне
 
     // В конструкторе адаптера передаём источник данных. По нему будем строить список. Пока для
     // простоты это будет массив строк, но также можно передавать список со сложной структурой,
