@@ -16,6 +16,11 @@ public class SocialNetworkAdapter extends RecyclerView.Adapter<SocialNetworkAdap
     private String[] dataSource;
     private OnItemMyClickListener onItemMyClickListener; // слушатель будет устанавливаться извне
 
+    // Сеттер слушателя нажатий
+    public void setOnItemMyClickListener(OnItemMyClickListener onItemMyClickListener) {
+        this.onItemMyClickListener = onItemMyClickListener;
+    }
+
     // В конструкторе адаптера передаём источник данных. По нему будем строить список. Пока для
     // простоты это будет массив строк, но также можно передавать список со сложной структурой,
     // считываемый из базы данных.
@@ -31,10 +36,8 @@ public class SocialNetworkAdapter extends RecyclerView.Adapter<SocialNetworkAdap
 
         // Создаём новый элемент пользовательского интерфейса
         // Через Inflater
-
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item, parent, false);
         // Здесь можно установить всякие параметры
-
         return new ViewHolder(v);
     }
 
@@ -69,6 +72,18 @@ public class SocialNetworkAdapter extends RecyclerView.Adapter<SocialNetworkAdap
             super(itemView);
 
             textView = (TextView) itemView;
+
+            // Обработчик нажатий на этом ViewHolder
+            textView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    int position = getAdapterPosition();
+                    if (onItemMyClickListener != null) {
+                        onItemMyClickListener.onMyItemClick(v, position);
+                    }
+                }
+            });
         }
 
         public TextView getTextView() {

@@ -1,5 +1,6 @@
 package com.example.socialnetworkapp.ui;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -10,6 +11,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.socialnetworkapp.R;
 
@@ -48,5 +51,15 @@ public class FragmentSocialNetwork extends Fragment {
         // Затем создаём адаптер и передаём ему данные в виде массива.
         SocialNetworkAdapter adapter = new SocialNetworkAdapter(data);
         recyclerView.setAdapter(adapter);
+
+        // Установим слушателя
+        adapter.setOnItemMyClickListener(new OnItemMyClickListener() {
+            @SuppressLint("DefaultLocale")
+            @Override
+            public void onMyItemClick(View view, int position) {
+                Toast.makeText(getContext(), String.format("%s - %d", ((TextView) view).getText(),
+                        position), Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 }

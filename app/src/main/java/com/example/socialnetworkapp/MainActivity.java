@@ -1,6 +1,7 @@
 package com.example.socialnetworkapp;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
@@ -22,14 +23,14 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initToolBar() {
-
+        // TODO toolbar
     }
 
     private void addFragment(Fragment fragment) {
         FragmentManager fm = getSupportFragmentManager();
         fm
                 .beginTransaction()
-                .add(R.id.main_container, fragment)
+                .replace(R.id.main_container, fragment)
                 .addToBackStack(null)
                 .commit();
     }
